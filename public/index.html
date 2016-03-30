@@ -1,31 +1,68 @@
-<html>
-
+<html ng-app="fypApp">
 	<head>
 		<title>Final Year Project</title>
+		<link rel="stylesheet" href="css/bootstrap.min.css">
 	</head>
-	<body>
-		<form method="GET" action="http://localhost:1337	/compute">
-			<input type="text" placeholder="elevation" name="elevation"/>
-			<br/>
-			<input type="text" placeholder="aspect" name="aspect"/>
-			<br/>
-			<input type="text" placeholder="slope" name="slope"/>
-			<br/>
-			<input type="text" placeholder="hor_water" name="hor_water"/>
-			<br/>
-			<input type="text" placeholder="ver_water" name="ver_water"/>
-			<br/>
-			<input type="text" placeholder="hor_road" name="hor_road"/>
-			<br/>
-			<input type="text" placeholder="hill_9" name="hill_9" />
-			<br/>
-			<input type="text" placeholder="hill_12" name="hill_12"/>
-			<br/>
-			<input type="text" placeholder="hill_3" name="hill_3"/>
-			<br/>
-			<input type="text" placeholder="hor_fire" name="hor_fire"/>
-			<br/>
-			<input type="submit" value="Compute"/>
-		</form>
+	<body ng-controller="MainCtrl">
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8">
+					<form>
+						<div class="form-group">
+							<label>Elevation</label>
+							<input type="text" class="form-control" ng-model="data.elevation" placeholder="Elevation">
+						</div>
+						<div class="form-group">
+							<label>Aspect</label>
+							<input type="text" class="form-control" ng-model="data.aspect" placeholder="Aspect">
+						</div>
+						<div class="form-group">
+							<label>Slope</label>
+							<input type="text" class="form-control" ng-model="data.slope" placeholder="Slope">
+						</div>
+						<div class="form-group">
+							<label>Horizontal Distance to Hydrology</label>
+							<input type="text" class="form-control" ng-model="data.hor_hydro" placeholder="Horizontal Distance to Hydrology">
+						</div>
+						<div class="form-group">
+							<label>Vertical Distance to Hydrology</label>
+							<input type="text" class="form-control" ng-model="data.ver_hydro" placeholder="Vertical Distance to Hydrology">
+						</div>
+						<div class="form-group">
+							<label>Horizontal Distance to Roadways</label>
+							<input type="text" class="form-control" ng-model="data.hor_road" placeholder="Horizontal Distance to Roadways">
+						</div>
+						<div class="form-group">
+							<label>Hillshade 9am</label>
+							<input type="text" class="form-control" ng-model="data.hill9" placeholder="Hill Shade at 9am">
+						</div>
+						<div class="form-group">
+							<label>Hillshade Noon</label>
+							<input type="text" class="form-control" ng-model="data.hill12" placeholder="Hillshade at 12pm">
+						</div>
+						<div class="form-group">
+							<label>Hillshade 3pm</label>
+							<input type="text" class="form-control" ng-model="data.hill3" placeholder="Hillshade at 3pm">
+						</div>
+						<div class="form-group">
+							<label>Horizontal Distance to Fire Point</label>
+							<input type="text" class="form-control" ng-model="data.hor_fire" placeholder="Horizontal Distance to Fire Point">
+						</div>
+						<button type="submit" class="btn btn-default" ng-click="compute()">Compute</button>
+					</form>
+				</div>
+			</div>
+		</div>
+		<pre>
+			{{data | json}}
+		</pre>
+		<pre>
+			{{result}}
+		</pre>
+		<script src="js/jquery-2.2.2.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>
+		<script src="js/angular.min.js"></script>
+		<script src="js/app.js"></script>
+		<script src="js/main.js"></script>
 	</body>
 </html>

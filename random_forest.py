@@ -15,18 +15,18 @@ test_another = []
 #print sys.argv
 
 for arg in sys.argv[1:11]:
-	test_another.append(int(arg))
+	test_another.append(float(arg))
 	#print arg
 	# test_X = np.append(test_X,int(arg))
 
 
 # print test_X
-print test_another
+#print test_another
 test_XX = [test_another]
-print test_XX
+#print test_XX
 
 test_X = np.array(test_XX)
-print test_X
+#print test_X
 
 train_normalized_X = preprocessing.normalize(train_X)
 
