@@ -1,3 +1,3 @@
 
 
-angular.module('fypApp',[]);
+angular.module('fypApp',['uiGmapgoogle-maps','ngLoadingSpinner']);

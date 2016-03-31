@@ -2,11 +2,14 @@
 	<head>
 		<title>Final Year Project</title>
 		<link rel="stylesheet" href="css/bootstrap.min.css">
+		<style>
+			.angular-google-map-container { height: 400px; }
+		</style>
 	</head>
 	<body ng-controller="MainCtrl">
-		<div class="container-fluid">
+		<div class="container-fluid" ng-init="elevation()">
 			<div class="row">
-				<div class="col-md-8">
+				<div class="col-md-4">
 					<form>
 						<div class="form-group">
 							<label>Elevation</label>
@@ -48,8 +51,27 @@
 							<label>Horizontal Distance to Fire Point</label>
 							<input type="text" class="form-control" ng-model="data.hor_fire" placeholder="Horizontal Distance to Fire Point">
 						</div>
-						<button type="submit" class="btn btn-default" ng-click="compute()">Compute</button>
+						<div class="row">
+							<button type="submit" class="btn btn-default" ng-click="compute()">Compute</button>
+							<span us-spinner="{radius:30, width:8, length: 16}"></span>
+							<button class='btn btn-default' ng-click="test1()">Test 1</button>
+							<button class='btn btn-default' ng-click="test2()">Test 2</button>
+							<button class='btn btn-default' ng-click="test3()">Test 3</button>
+						</div>	
 					</form>
+				</div>
+				<div class="col-md-8">
+					<div id="map_canvas">
+					    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" bounds="map.bounds">
+					        <ui-gmap-rectangle bounds="bounds" draggable="true" editable="true" fill="'#FFFFFF .5'"></ui-gmap-rectangle>
+					    </ui-gmap-google-map>
+					    <pre>
+							{{bounds}}
+						</pre>
+						<pre>
+							{{map}}
+						</pre>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -60,8 +82,15 @@
 			{{result}}
 		</pre>
 		<script src="js/jquery-2.2.2.min.js"></script>
+		<script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
 		<script src="js/bootstrap.min.js"></script>
+		<script src="js/lodash.min.js"></script>
 		<script src="js/angular.min.js"></script>
+		<script src="js/spin.min.js"></script>
+		<script src="js/angular-spin.min.js"></script>
+		<script src="js/angular-loading-spinner.min.js"></script>
+		<script src="js/angularsimplelogger.js"></script>
+		<script src="js/angulargooglemaps.js"></script>
 		<script src="js/app.js"></script>
 		<script src="js/main.js"></script>
 	</body>
