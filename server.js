@@ -13,7 +13,8 @@ app.use('/', express.static(__dirname + '/public'));
 
 app.post('/compute', function(request,response){
 
-	//console.log(request.body);
+	console.log("Request recieved: ");
+	console.log(request.body);
 	var normalized_data = normalize(request.body);
 	var args = [];
 	args[0] = normalized_data.elevation;
@@ -32,11 +33,15 @@ app.post('/compute', function(request,response){
 		args: args
 	}
 	//console.log(options);
-
+	console.log("\nRunning python script: ");
+	console.log("\nFile Name: random_forest.py");
+	console.log("\nArguments: \n");
+	console.log(args);
+	console.log("\n");
 	//console.log(request.query);
 	PythonShell.run('./random_forest.py', options, function (err,results) {
 	  if (err) throw err;
-	  console.log(results);
+	  console.log("Result: " + results);
 	  response.send(results);
 	});
 })

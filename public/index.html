@@ -9,6 +9,7 @@
 	<body ng-controller="MainCtrl">
 		<div class="container-fluid" ng-init="elevation()">
 			<div class="row">
+				<span us-spinner="{radius:30, width:8, length: 16}"></span>
 				<div class="col-md-4">
 					<form>
 						<div class="form-group">
@@ -53,7 +54,6 @@
 						</div>
 						<div class="row">
 							<button type="submit" class="btn btn-default" ng-click="compute()">Compute</button>
-							<span us-spinner="{radius:30, width:8, length: 16}"></span>
 							<button class='btn btn-default' ng-click="test1()">Test 1</button>
 							<button class='btn btn-default' ng-click="test2()">Test 2</button>
 							<button class='btn btn-default' ng-click="test3()">Test 3</button>

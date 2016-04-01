@@ -68,7 +68,7 @@ angular.module('fypApp')
 			$scope.data.hill12 = 212;
 			$scope.data.hill3 = 200;
 			$scope.data.hor_fire = 6132;
-			//Should return 2
+			//Should return 1
 		}
 
 		$scope.test3 = function(){
@@ -83,7 +83,7 @@ angular.module('fypApp')
 			$scope.data.hill12 = 238;
 			$scope.data.hill3 = 135;
 			$scope.data.hor_fire = 6121;
-			//Should Return 1
+			//Should Return 2
 		}
 
 		var sendData = function(){

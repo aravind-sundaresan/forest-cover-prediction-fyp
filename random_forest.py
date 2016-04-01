@@ -5,9 +5,9 @@ from sklearn.ensemble import RandomForestClassifier
 
 dataset = np.loadtxt("normalized.csv", delimiter=",")
 
-train_X = dataset[1:10000,0:10]
-train_Y = dataset[1:10000,10]
-
+train_X = dataset[1:15121,0:10]
+train_Y = dataset[1:15121,10]
+	
 #print train_Y
 
 test_X = []
