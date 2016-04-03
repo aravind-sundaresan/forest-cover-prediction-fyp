@@ -3,39 +3,83 @@
 angular.module('fypApp')
 	.controller('MainCtrl', function($scope,$q,$http){
 
+		$scope.data = {
+			elevation : 0
+		};
 
 		$scope.key1 = "AIzaSyCiI1Q0cmbWn6Kpw3abRXkiSt6RCtir9GU";
 
-		$scope.map = {center: {latitude: 2, longitude: 2}, zoom: 6, bounds: {}, options: { scrollwheel: false}};
+		$scope.map = {center: {latitude: 12.9716, longitude: 77.5946}, zoom: 12, bounds: {}, options: { scrollwheel: false}};
         $scope.bounds =  {
             sw: {
-                latitude: $scope.map.center.latitude-2,
-                longitude: $scope.map.center.longitude-2
+                latitude: $scope.map.center.latitude-0.0002,
+                longitude: $scope.map.center.longitude-0.0002
             },
             ne: {
-                latitude: $scope.map.center.latitude+2,
-                longitude: $scope.map.center.longitude+2
+                latitude: $scope.map.center.latitude+0.0002,
+                longitude: $scope.map.center.longitude+0.0002
             }
         }
-		//chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
+		//Windows + R : chrome.exe --user-data-dir="C:/Chrome dev session" --disable-web-security
 
 		$scope.result = ""
 		$scope.compute = function(){
 			var promise = sendData();
 			promise.then(function(result){
-				$scope.result = result;
+				if(result == 1.0){
+					$scope.result = "Spruce";
+				}
+				else if(result == 2.0){
+					$scope.result = "Lodgepole Pine";
+				}
+				else if(result == 3.0){
+					$scope.result = "Poderosa Pine";
+				}
+				else if(result == 4.0){
+					$scope.result = "Cottonwood/Willow";
+				}
+				else if(result == 5.0){
+					$scope.result = "Aspen";
+				}
+				else if(result == 6.0){
+					$scope.result = "Douglas-Fir";
+				}
+				else if(result == 7.0){
+					$scope.result = "Krummholz";
+				}
+				//$scope.result = result;
 			})
 		}
 
 		$scope.elevation = function(){
+
+			var topLeftLat = $scope.bounds.ne.latitude;
+			var topLeftLong = $scope.bounds.sw.longitude;
+
+			var bottomLeftLat = $scope.bounds.sw.latitude;
+			var bottomLeftLong = $scope.bounds.sw.longitude;
+
+			var bottomRightLat = $scope.bounds.sw.latitude;
+			var bottomRightLong = $scope.bounds.ne.longitude;
+
+			var topRightLat = $scope.bounds.ne.latitude;
+			var topRightLong = $scope.bounds.ne.longitude;
+
+			var locationArray = topLeftLat + ',' + topLeftLong;
+			locationArray += "|" + topRightLong + ',' + topRightLong;
+			locationArray += "|" + bottomLeftLat + ',' + bottomLeftLong;
+			locationArray += "|" + bottomRightLat + ',' + bottomRightLong;
+
+			var endpoint = "https://maps.googleapis.com/maps/api/elevation/json?locations=" + locationArray + "&key=" + $scope.key1;
 			$http({
 				method: "GET",
-				url: "https://maps.googleapis.com/maps/api/elevation/json?locations=39.7391536,-104.9847034&key=" + $scope.key1,
+				url: endpoint,
 				header: {
 					"Access-Control-Allow-Origin" : "http:localhost:1337"
 				}
 			}).then(function success(response){
-				console.log(response);
+				//console.log(response.data.results);
+				calculateElevation(response.data.results);
 			}, function error(error){
 				console.log(error);
 			});
@@ -106,4 +150,14 @@ angular.module('fypApp')
 			return deferred.promise;
 		}
 
+		var calculateElevation = function(data){
+			var total = 0;
+			for(var i = 0; i<data.length;i++){
+				//console.log(data[i].elevation);
+				total += data[i].elevation;
+			}
+			console.log(total);
+			$scope.data.elevation = 0;
+			$scope.data.elevation = total/4;
+		}
 	});

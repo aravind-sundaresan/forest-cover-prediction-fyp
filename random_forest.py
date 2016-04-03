@@ -37,7 +37,7 @@ model.fit(train_X,train_Y)
 
 prediction = model.predict(test_X)
 
-print prediction
+print prediction[0]
 
 #cmdargs = str(sys.argv)
 

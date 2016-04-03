@@ -7,14 +7,22 @@
 		</style>
 	</head>
 	<body ng-controller="MainCtrl">
-		<div class="container-fluid" ng-init="elevation()">
+		<div class="container-fluid">
 			<div class="row">
-				<span us-spinner="{radius:30, width:8, length: 16}"></span>
+				
 				<div class="col-md-4">
 					<form>
 						<div class="form-group">
 							<label>Elevation</label>
 							<input type="text" class="form-control" ng-model="data.elevation" placeholder="Elevation">
+							<br/>
+							<p><b>SW:</b></p>
+							<p>{{bounds.sw.latitude}} , {{bounds.sw.longitude}}</p>
+							<p><b>NE:</b></p>
+							<p>{{bounds.ne.latitude}} , {{bounds.ne.longitude}}</p>
+							<br/>
+							<p>{{area}}</p>
+							<button class="btn btn-success" ng-click="elevation()">Get Elevation</button>
 						</div>
 						<div class="form-group">
 							<label>Aspect</label>
@@ -65,11 +73,19 @@
 					    <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" options="map.options" bounds="map.bounds">
 					        <ui-gmap-rectangle bounds="bounds" draggable="true" editable="true" fill="'#FFFFFF .5'"></ui-gmap-rectangle>
 					    </ui-gmap-google-map>
+					    
 					    <pre>
 							{{bounds}}
 						</pre>
-						<pre>
+						<!--pre>
 							{{map}}
+						</pre-->
+					</div>
+					<br/>
+					<div>
+						<span us-spinner="{radius:30, width:8, length: 16}"></span>
+						<pre>
+							{{result}}
 						</pre>
 					</div>
 				</div>
@@ -77,9 +93,6 @@
 		</div>
 		<pre>
 			{{data | json}}
-		</pre>
-		<pre>
-			{{result}}
 		</pre>
 		<script src="js/jquery-2.2.2.min.js"></script>
 		<script src='http://maps.googleapis.com/maps/api/js?sensor=false'></script>
